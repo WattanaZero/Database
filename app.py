@@ -1,13 +1,14 @@
 # app.py
 # Required Imports
 import os
+import firebase_admin
 from flask import Flask, request, jsonify
 from firebase_admin import credentials, firestore, initialize_app
 # Initialize Flask App
 app = Flask(__name__)
 # Initialize Firestore DB
-cred = credentials.Certificate("path/Database/Key.json")
-default_app = initialize_app(cred)
+cred = credentials.Certificate("Key.json")
+firebase_admin.initialize_app(cred)
 db = firestore.client()
 todo_ref = db.collection('todos')
 @app.route('/add', methods=['POST'])
